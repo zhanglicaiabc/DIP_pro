@@ -3,14 +3,17 @@ from build_model import *
 from read_data import *
 from segment import *
 import numpy as np
+from cifar10_cap_copy import *
 
 if __name__ == '__main__':
     # 深度学习方法
     # gpu_options = tf.compat.v1.GPUOptions(per_process_gpu_memory_fraction=0.85)
     # config = tf.compat.v1.ConfigProto(gpu_options=gpu_options)
     # session = tf.compat.v1.Session(config=config)
-    model, optimizer = build_mnist_fnn_model()
-    mnist_cap_fnn_train(model, optimizer)
+    conv_net, fc_net, optimizer2 = build_vgg13_model(0.0001)
+
+    train_cifar10_copy(conv_net, fc_net, optimizer2)
+
     # x_train, y_train, x_valid, y_valid, x_test = load_data()
     # x_train_flag = np.load('x_train_flag.npy')
     # x_valid_flag = np.load('x_valid_flag.npy')

@@ -1,5 +1,6 @@
 import numpy as np
-import cv2
+import matplotlib.image as imgplt
+# import cv2
 def load_data():
     # 读取训练集文件
     x_train = []
@@ -21,14 +22,14 @@ def load_data():
                 path = "dataset/training/huai_"
             num = i * 100 + j + 1
             path = path + str(num) + '.png'
-            img = cv2.imread(path)
+            img = imgplt.imread(path)
+            # img = cv2.imread(path)
             if img.shape != (256, 256, 3):
                 # 图像填充为（256，256，3）
                 img = np.pad(img, (
                     (int((256 - img.shape[0]) / 2), int((256 - img.shape[0]) - (256 - img.shape[0]) / 2)),
                     (int((256 - img.shape[1]) / 2)+1, int((256 - img.shape[1]) - (256 - img.shape[1]) / 2)), (0, 0)),
                              'edge')
-
             x_train.append(img)
             y_train.append(i)
 
@@ -52,7 +53,8 @@ def load_data():
                 path = "dataset/validation/huai_"
             num = num + j + 1
             path = path + str(num) + '.png'
-            img = cv2.imread(path)
+            img = np.array(imgplt.imread(path))
+            # img = cv2.imread(path)
             if img.shape != (256, 256, 3):
                 # 图像填充为（256，256，3）
                 img = np.pad(img, (
@@ -63,14 +65,17 @@ def load_data():
             y_valid.append(i)
 
     # 读取测试集数据
-    for i in range(30):
-        path = "dataset/testing/" + str(i + 1) + '.png'
-        img = cv2.imread(path)
-        x_test.append(img)
-        if img.shape != (256, 256, 3):
-            print(' test error')
+    # for i in range(30):
+    #     path = "dataset/testing/" + str(i + 1) + '.png'
+    #     # img = cv2.imread(path)
+    #     img = np.array(imgplt.imread(path))
+    #     x_test.append(img)
+    #     if img.shape != (256, 256, 3):
+    #         print(' test error')
     # 转变成numpy数组
+    print(len(x_train))
     x_train = np.asarray(x_train, dtype=np.float32)
+    print(x_train.shape)
     y_train = np.asarray(y_train, dtype=np.int32)
     x_valid = np.asarray(x_valid, dtype=np.float32)
     y_valid = np.asarray(y_valid, dtype=np.int32)

@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from read_data import *
-import cv2 as cv
+# import cv2 as cv
 from PIL import Image
 
 def rbg_to_grayscale(images):
